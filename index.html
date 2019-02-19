@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+
+<html lang="nl">
+
+	<head>
+		
+			<title>Space X Dashboard</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<meta charset="utf-8"/>
+			<link rel="stylesheet" type="text/css" href="css/style.css"/>
+			<script src="https://www.gstatic.com/charts/loader.js"></script>
+			
+			<!-- Gauge -->
+
+			<script>
+				google.charts.load('current', {'packages':['gauge']});
+				google.charts.setOnLoadCallback(drawChart);
+		  
+				function drawChart() {
+		  
+				  var data = google.visualization.arrayToDataTable([
+					['Label', 'Value'],
+					['Snelheid', 82],
+					['Acceleratie', 45],
+					['Brandstof', 25]
+				  ]);
+		  
+				  var options = {
+					minwidth: 300, maxwidth: 400, minwidth:100, maxheight: 125,
+					yellowFrom: 75, yellowTo: 85,
+					redFrom: 85, redTo: 100,
+					minorTicks: 5
+				  };
+		  
+				  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+		  
+				  chart.draw(data, options);
+		  
+				  setInterval(function() {
+					data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+					chart.draw(data, options);
+				  }, 13000);
+				  setInterval(function() {
+					data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+					chart.draw(data, options);
+				  }, 5000);
+				  setInterval(function() {
+					data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+					chart.draw(data, options);
+				  }, 26000);
+				}
+			  </script>
+
+			  <!-- Pie -->
+
+    		<script>
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart() {
+
+				var data = google.visualization.arrayToDataTable([
+				['Product', 'Hoeveelheid'],
+				['Water', 450],
+				['Vlees', 250],
+				['Brood', 150],
+				['Groente & Fruit', 150],
+				
+				]);
+
+				var options = {
+				title: 'Voedselvoorraad',
+				backgroundColor: 'transparent',
+				fontSize: 12,
+				pieSliceText: 'value',
+				slices: {
+					0: {color: '#3dccc9'},
+					1: {color: '#b72707'},
+					2: {color: '#7f6138'},
+					3: {color: '#81d323'}
+						}
+					}
+				
+
+				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+				chart.draw(data, options);
+				
+				}
+
+			</script>
+
+			<!-- Progress -->
+
+			<script>
+					function move() {
+					  var elem = document.getElementById("myBar");   
+					  var width = 1;
+					  var id = setInterval(frame, 10);
+					  function frame() {
+						if (width >= 100) {
+						  clearInterval(id);
+						} else {
+						  width++; 
+						  elem.style.width = width + '%';
+						  elem.innerHTML = width * 1 + '%'; 
+						}
+					  }
+					}
+
+
+			</script>
+
+
+	</head>
+	
+	<body>
+	
+			<header>
+
+				<img src="images/logo.png" alt="Space-X Logo">
+				
+			</header>
+
+			<div class="row">
+			
+				<div class="column">
+
+					<h3>Motorinformatie</h3>
+
+					<div id="chart_div"></div>
+					
+		
+				</div>
+				  
+				<div class="column">
+					
+						<h3>Voedselinformatie</h3>
+
+						<div id="piechart"></div>
+					
+				</div>
+
+				<div class="column">
+
+						<h3>Reistijdinformatie</h3>
+
+					<div id="progress">
+
+					<p>Afstand afgelegd over tijd</p>
+				  
+					<div id="myProgress">
+
+						<div id="myBar"><span>10:45 uur</span></div>
+						
+
+					</div>
+
+					<br/>
+					
+						<p>Totale afstand 50000 km</p>
+					
+					</div>
+	
+				</div>
+			  
+			</div>
+			
+	</body>
+
+</html>
